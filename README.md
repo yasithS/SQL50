@@ -31,5 +31,14 @@ select tweet_id from tweets
 where length(content) > 15
 ```
 
+## BASIC JOINS
+
+### 1378. Replace Employee ID With The Unique Identifier
+```
+select en.unique_id , e.name 
+from Employees as e left join EmployeeUNI as en
+on e.id = en.id
+```
+
 
 
