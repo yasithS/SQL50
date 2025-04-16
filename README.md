@@ -93,4 +93,37 @@ LEFT jOIN bonus b ON e.empId = b.empId
 WHERE b.bonus < 1000 or b.bonus IS NULL
 ```
 
+### 1280. Students and Examinations
+```
+SELECT s.student_id,
+        s.student_name,
+        sub.subject_name, 
+        count(e.subject_name) AS attended_exams
+FROM Students s
+CROSS JOIN Subjects sub
+LEFT JOIN Examinations e ON 
+    s.student_id = e.student_id AND
+    sub.subject_name = e.subject_name
+GROUP BY s.student_id, 
+         s.student_name,
+         sub.subject_name
+ORDER BY s.student_id, 
+        sub.subject_name
+```
+
+### 570. Managers with at Least 5 Direct Reports (MEDIUM)
+```
+SELECT E1.name 
+FROM Employee E1
+join
+    (
+    SELECT managerid
+    FROM Employee 
+    GROUP BY managerId
+    HAVING COUNT(*) >= 5
+    )  E2
+ON E1.id = E2.managerId
+```
+
+
 
