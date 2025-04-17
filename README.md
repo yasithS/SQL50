@@ -169,5 +169,23 @@ ON p.employee_id = e.employee_id
 GROUP BY project_id
 ```
 
+### 1633. Percentage of Users Attended a Contest
+```
+SELECT contest_id,
+        round(count(user_id) * 100 / (select count(user_id) from users), 2) as percentage
+FROM register 
+GROUP BY contest_id
+ORDER BY percentage DESC, contest_id 
+```
+
+### 1211. Queries Quality and Percentage
+```
+select query_name,
+        ROUND(SUM(rating / position) / count(query_name), 2) as quality, 
+        ROUND(SUM(CASE WHEN rating < 3 THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS poor_query_percentage
+from queries 
+group by query_name
+```
+
 
 
