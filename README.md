@@ -134,5 +134,40 @@ LEFT JOIN confirmations c ON s.user_id = c.user_id
 GROUP BY user_id
 ```
 
+## Basic Aggregate Functions
+
+### 620. Not Boring Movies
+```
+SELECT id, 
+        movie, 
+        description, 
+        rating 
+FROM Cinema 
+WHERE description != 'boring' AND
+         MOD(id ,2) = 1
+ORDER BY rating DESC
+```
+
+### 1251. Average Selling Price
+```
+SELECT p.product_id,
+        IFNULL(ROUND(sum(u.units * p.price) / sum(u.units), 2), 0) AS average_price
+FROM prices p 
+LEFT JOIN unitsSold u 
+ON p.product_id = u.product_id
+AND purchase_date BETWEEN start_date AND end_date
+GROUP BY p.product_id
+```
+
+### 1075. Project Employees I
+```
+SELECT p.project_id, 
+        ROUND(sum(experience_years) / count(project_id), 2) AS average_years
+FROM project p
+LEFT JOIN employee e
+ON p.employee_id = e.employee_id
+GROUP BY project_id
+```
+
 
 
