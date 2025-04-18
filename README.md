@@ -186,6 +186,28 @@ select query_name,
 from queries 
 group by query_name
 ```
+### 1193. Monthly Transactions I (MEDIUM)
+```
+select DATE_FORMAT(trans_date, '%Y-%m') as month, 
+        country,
+        count(id) as trans_count,
+        SUM(if(state = 'approved', 1, 0)) as approved_count,
+        SUM(amount) as trans_total_amount,
+        SUM(CASE WHEN state = 'approved' THEN amount ELSE 0 END) AS approved_total_amount
+from transactions
+GROUP BY month, country 
+```
+
+### 1174. Immediate Food Delivery II (MEDIUM)
+```
+SELECT ROUND(AVG(order_date=customer_pref_delivery_date) * 100, 2) as immediate_percentage 
+FROM Delivery WHERE (customer_id, order_date) IN 
+    (SELECT customer_id, MIN(order_date) AS order_date
+    FROM Delivery
+    GROUP BY customer_id)
+```
+
+
 
 
 
