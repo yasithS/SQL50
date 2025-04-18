@@ -207,6 +207,18 @@ FROM Delivery WHERE (customer_id, order_date) IN
     GROUP BY customer_id)
 ```
 
+### 550. Game Play Analysis IV (MEDIUM)
+```
+select ROUND(count(*) / (SELECT COUNT(DISTINCT player_id) FROM Activity), 2)AS fraction
+from Activity
+where (player_id, DATE_SUB(event_date, INTERVAL 1 DAY))
+    IN(
+        select player_id, 
+                MIN(event_date) AS first_time_login
+        from Activity
+        Group BY player_id
+    )
+```
 
 
 
